@@ -1,0 +1,23 @@
+@startuml
+actor User
+participant "KeyboardTrainer" as KT
+participant "KeyEvent" as KE
+participant "JOptionPane" as JP
+
+User -> KT: keyTyped(KE)
+KT -> KE: getKeyChar()
+KT -> KT: if (gameRunning && e.getKeyChar() == currentLetter)
+alt correct letter
+    KT -> KT: score++
+    KT -> KT: increaseDifficulty()
+    KT -> KT: generateNewLetter()
+    KT -> KT: checkGameOver()
+else incorrect letter
+    KT -> KT: (no action)
+end
+KT -> KT: repaint()
+
+alt Game Over
+    KT -> JP: showMessageDialog("Поздравляем! Вы набрали 50 очков!")
+end
+@enduml

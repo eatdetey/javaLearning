@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="calc">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/JVL1/Calc/classes/calc.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

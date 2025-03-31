@@ -1,0 +1,64 @@
+@startuml
+
+class KeyboardTrainer {
+    - char currentLetter
+    - double x
+    - double y
+    - int score
+    - double speed
+    - Timer timer
+    - Random random
+    - JButton startButton
+    - boolean gameRunning
+    - long lastUpdateTime
+    + KeyboardTrainer()
+    + void startGame()
+    + void generateNewLetter()
+    + void increaseDifficulty()
+    + void checkGameOver()
+    + void paintComponent(Graphics g)
+    + void actionPerformed(ActionEvent e)
+    + static void main(String[] args)
+}
+
+class Timer {
+    + void start()
+    + void stop()
+}
+
+class JButton {
+    + void setFont(Font font)
+    + void addActionListener(ActionListener listener)
+    + void setVisible(boolean visible)
+}
+
+class Font {
+    + static Font BOLD
+}
+
+class KeyAdapter {
+    + void keyTyped(KeyEvent e)
+}
+
+class KeyEvent {
+    + char getKeyChar()
+}
+
+class KeyListener {
+    + void keyTyped(KeyEvent e)
+}
+
+class ActionEvent {}
+
+class ActionListener {
+    + void actionPerformed(ActionEvent e)
+}
+
+KeyboardTrainer "1" ..> "1" Timer
+KeyboardTrainer "1" ..> "1" JButton
+KeyboardTrainer "1" ..> "1" Random
+KeyboardTrainer "1" ..> "1" KeyAdapter
+KeyboardTrainer "1" ..|> "1" KeyListener
+KeyboardTrainer "1" ..|> "1" ActionListener
+
+@enduml

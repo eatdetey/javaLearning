@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Calc">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/aptem/lab1/Calc/Calc.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

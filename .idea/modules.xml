@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/JVL2&amp;3/Animal/Animal.iml" filepath="$PROJECT_DIR$/JVL2&amp;3/Animal/Animal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JVL2&amp;3/AnimalInterface&amp;Super/AnimalInterface&amp;Super.iml" filepath="$PROJECT_DIR$/JVL2&amp;3/AnimalInterface&amp;Super/AnimalInterface&amp;Super.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JVL2&amp;3/AnimalInterfaces/AnimalInterfaces.iml" filepath="$PROJECT_DIR$/JVL2&amp;3/AnimalInterfaces/AnimalInterfaces.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JVL3a/ArraysLists/ArraysLists.iml" filepath="$PROJECT_DIR$/JVL3a/ArraysLists/ArraysLists.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JVL1/JVL1.iml" filepath="$PROJECT_DIR$/JVL1/JVL1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aptem/aptem.iml" filepath="$PROJECT_DIR$/aptem/aptem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/java.iml" filepath="$PROJECT_DIR$/.idea/java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JVL2&amp;3/test 3.3/test 3.3.iml" filepath="$PROJECT_DIR$/JVL2&amp;3/test 3.3/test 3.3.iml" />
+    </modules>
+  </component>
+</project>
