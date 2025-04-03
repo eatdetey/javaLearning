@@ -1,0 +1,50 @@
+@startuml
+participant "main" as Main
+participant "EventQueue (EDT)" as EDT
+participant "FallingCircle Thread 1" as FC1
+participant "FallingCircle Thread 2" as FC2
+participant "FallingCircle Thread 3" as FC3
+participant "FallingCircle Thread 4" as FC4
+
+Main -> Main: Запуск программы
+Main -> EDT: SwingUtilities.invokeLater(KeyboardTrainer)
+activate EDT
+EDT -> EDT: Создание окна и кнопок
+EDT -> EDT: Ожидание событий (UI, клавиатура)
+
+EDT -> Main: Нажатие кнопки "Старт"
+Main -> EDT: startGame()
+EDT -> EDT: addNewCircle()
+EDT -> FC1: new Thread(FallingCircle).start()
+activate FC1
+EDT -> FC2: new Thread(FallingCircle).start()
+activate FC2
+EDT -> FC3: new Thread(FallingCircle).start()
+activate FC3
+EDT -> FC4: new Thread(FallingCircle).start()
+activate FC4
+
+loop Пока круги падают
+    FC1 -> FC1: y += speed
+    FC1 -> EDT: repaint()
+    FC1 -> FC1: sleep(20ms)
+end
+deactivate FC1
+
+alt Игрок нажал букву
+    EDT -> FC1: stopFalling()
+    EDT -> EDT: removeCircle()
+    EDT -> EDT: addNewCircle()
+    EDT -> FC1: new Thread(FallingCircle).start()
+    activate FC1
+end
+
+alt Кружок упал
+    FC1 -> EDT: decreaseScore()
+    EDT -> EDT: removeCircle()
+    EDT -> EDT: addNewCircle()
+    EDT -> FC1: new Thread(FallingCircle).start()
+    activate FC1
+end
+
+@enduml

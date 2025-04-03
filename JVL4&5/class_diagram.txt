@@ -1,24 +1,37 @@
 @startuml
 
 class KeyboardTrainer {
-    - char currentLetter
-    - double x
-    - double y
+    - List<FallingCircle> circles
     - int score
-    - double speed
     - Timer timer
     - Random random
     - JButton startButton
     - boolean gameRunning
-    - long lastUpdateTime
     + KeyboardTrainer()
     + void startGame()
-    + void generateNewLetter()
-    + void increaseDifficulty()
+    + void addNewCircle()
+    + void removeCircle(FallingCircle circle)
+    + void decreaseScore()
     + void checkGameOver()
     + void paintComponent(Graphics g)
     + void actionPerformed(ActionEvent e)
     + static void main(String[] args)
+}
+
+class FallingCircle {
+    - char letter
+    - int x
+    - int y
+    - int speed
+    - boolean falling
+    - Random random
+    - KeyboardTrainer trainer
+    + FallingCircle(KeyboardTrainer trainer)
+    + void run()
+    + void stopFalling()
+    + char getLetter()
+    + int getX()
+    + int getY()
 }
 
 class Timer {
@@ -54,11 +67,19 @@ class ActionListener {
     + void actionPerformed(ActionEvent e)
 }
 
+class Runnable {
+    + void run()
+}
+
+KeyboardTrainer "1" ..> "*" FallingCircle
 KeyboardTrainer "1" ..> "1" Timer
 KeyboardTrainer "1" ..> "1" JButton
 KeyboardTrainer "1" ..> "1" Random
 KeyboardTrainer "1" ..> "1" KeyAdapter
 KeyboardTrainer "1" ..|> "1" KeyListener
 KeyboardTrainer "1" ..|> "1" ActionListener
+
+FallingCircle "1" ..> "1" KeyboardTrainer
+FallingCircle "1" ..|> "1" Runnable
 
 @enduml
