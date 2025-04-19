@@ -28,8 +28,8 @@ public class FallingCircle implements Runnable {
         }
 
         if (falling) {
-            trainer.decreaseScore(); // Уменьшаем счет
-            trainer.removeCircle(this); // Удаляем текущий круг и создаем новый
+            trainer.decreaseScore();
+            trainer.removeCircle(this);
         }
     }
 
