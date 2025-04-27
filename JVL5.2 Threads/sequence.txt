@@ -1,0 +1,49 @@
+@startuml
+title Sequence Diagram: Travel Agency Simulation
+
+participant "Main" as Main
+participant "SellerSemaphore" as SellerSem
+participant "ManagerSemaphore" as ManagerSem
+participant "Executor" as Exec
+participant "SellerWorker" as Seller
+participant "ManagerWorker" as Manager
+database "Statistics" as Stats
+
+Main -> SellerSem: new Semaphore(1)
+Main -> ManagerSem: new Semaphore(1)
+Main -> Exec: newFixedThreadPool(2)
+
+loop Для каждого часа симуляции (60 мин)
+    Main -> Main: Генерация времени прибытия\ninterArrivalTime = expovariate(λ)
+    Main -> Main: currentTime += interArrivalTime
+    
+    alt Проверка продавца
+        Main -> SellerSem: availablePermits() == 0
+        SellerSem --> Main: false (свободен)
+        Main -> SellerSem: tryAcquire()
+        SellerSem --> Main: true (успешно)
+        Main -> Stats: clientsServed++
+        Main -> Stats: totalProfit += 20000
+        Main -> Exec: submit(SellerTask)
+        Exec -> Seller: Запуск потока
+        Seller -> Seller: sleep(20 мин)
+        Seller -> SellerSem: release()
+    else Проверка менеджера
+        Main -> ManagerSem: availablePermits() == 0
+        ManagerSem --> Main: false (свободен)
+        Main -> ManagerSem: tryAcquire()
+        ManagerSem --> Main: true (успешно)
+        Main -> Stats: clientsServed++
+        Main -> Stats: totalProfit += 20000
+        Main -> Exec: submit(ManagerTask)
+        Exec -> Manager: Запуск потока
+        Manager -> Manager: sleep(30 мин)
+        Manager -> ManagerSem: release()
+    else Оба заняты
+        Main -> Stats: clientsLost++
+    end
+end
+
+Main -> Exec: shutdownNow()
+
+@enduml
