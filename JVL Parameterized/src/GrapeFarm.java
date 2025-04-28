@@ -26,15 +26,33 @@ public class GrapeFarm {
     }
 
     public List<Grape> filterGrapes(Predicate<Grape> predicate) {
-        return grapes.stream()
-                .filter(predicate)
-                .collect(Collectors.toList());
+        List<Grape> result = new ArrayList<>();
+        for (Grape grape: grapes) {
+            if (predicate.test(grape)) {
+                result.add(grape);
+            }
+        }
+        return result;
     }
 
     public List<Grape> sortByPrice(List<Grape> grapeList) {
         return grapeList.stream()
                 .sorted(Comparator.comparingDouble(Grape::getPrice))
                 .collect(Collectors.toList());
+    }
+
+    public static class GrapePredicateType implements Predicate<Grape> {
+        @Override
+        public boolean test(Grape grape) {
+            return grape.getType() == GrapeType.WINE;
+        }
+    }
+
+    public static class GrapePredicateColor implements Predicate<Grape> {
+        @Override
+        public boolean test(Grape grape) {
+            return grape.getColor() == GrapeColor.WHITE;
+        }
     }
 
     public static void main(String[] args) {
@@ -48,13 +66,12 @@ public class GrapeFarm {
         farm.addGrape(new Grape("Шардоне", GrapeColor.GREEN, StorageDuration.LONG_TERM, GrapeType.WINE, 210.0));
 
         System.out.println("\n=== Винный виноград (используя предикат) ===");
-        List<Grape> wineGrapes = farm.filterGrapes(new Predicate<Grape>() {
-            @Override
-            public boolean test(Grape grape) {
-                return grape.getType() == GrapeType.WINE;
-            }
-        });
+        List<Grape> wineGrapes = farm.filterGrapes(new GrapePredicateType());
         wineGrapes.forEach(System.out::println);
+
+        System.out.println("\n=== Белый виноград (используя предикат) ===");
+        List<Grape> whiteGrapes = farm.filterGrapes(new GrapePredicateColor());
+        whiteGrapes.forEach(System.out::println);
 
         System.out.println("\n=== Зеленый виноград (используя лямбду) ===");
         List<Grape> greenGrapes = farm.filterGrapes(g -> g.getColor() == GrapeColor.GREEN);
